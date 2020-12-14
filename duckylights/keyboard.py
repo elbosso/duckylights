@@ -3,11 +3,13 @@ from contextlib import contextmanager
 
 
 def device_path(vendor=0x04d9, product=0x0348, interface=1):
+    print("interface "+str(interface))
+    print("product "+str(product))
     return next(hidapi.enumerate(vendor_id=vendor, product_id=product, interface_number=interface)).path
 
 
 @contextmanager
-def keyboard(path=device_path()):
+def keyboard(path):
     device = DuckyKeyboard(hidapi.open_path(path))
     yield device
     device.close()
