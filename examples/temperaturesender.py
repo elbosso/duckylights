@@ -14,7 +14,7 @@ import paho.mqtt.client as mqtt
 MQTT_SERVER = os.getenv("MQTT_SERVER", 'mqtt.pi-docker.lab')
 MQTT_PORT = os.getenv("MQTT_PORT", 1883)
 MQTT_TOPIC = os.getenv("MQTT_TOPIC",'home/tichy/temps/')
-INTERVAL = int(os.getenv("MQTT_INTERVAL", 10))
+INTERVAL = int(os.getenv("MQTT_INTERVAL", 2))
 USERNAME = os.getenv("MQTT_USERNAME")
 PASSWORD = os.getenv("MQTT_PASSWORD")
 
@@ -76,7 +76,7 @@ client = mqtt.Client()
 print("==== Connecting to %s ====" % MQTT_SERVER)
 client.connect(MQTT_SERVER, MQTT_PORT, 60)
 
-client.loop_start()
+client.loop_forever()
 
 # test with:
 # mosquitto_sub -h mqtt.pi-docker.lab -t 'home/tichy/#' -v
